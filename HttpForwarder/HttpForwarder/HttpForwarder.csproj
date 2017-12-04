@@ -20,6 +20,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="host.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="host.jcfg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -10,9 +10,16 @@ namespace HttpForwarder
     {
         public static string AsString(this Stream stream)
         {
-            StreamReader reader = new StreamReader(stream);
-            string text = reader.ReadToEnd();
-            return text;
+            if (stream != null)
+            {
+                StreamReader reader = new StreamReader(stream);
+                string text = reader.ReadToEnd();
+                return text;
+            }
+            else
+            {
+                return string.Empty;
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ namespace HttpForwarder.Client
     {
         public string ServerUrl { get; set; }
         public string EndpointUrl { get; set; }
+        public string ChannelName { get; set; }
         public string Uid { get; set; }
     }
 }

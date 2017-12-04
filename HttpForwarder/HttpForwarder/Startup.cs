@@ -27,13 +27,6 @@ namespace HttpForwarder
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseSignalR(options => options.MapHub<ClientSub>("clientsub")).UseMvc();
-
-            //app.UseMvc(routes =>
-            //{
-            //    routes.MapRoute(
-            //        name: "default",
-            //        template: "{controller=Http}/{action=Index}/{id?}");
-            //});
         }
     }
 }

@@ -27,21 +27,23 @@ namespace HttpForwarder.Client
                                     .WithUrl(url)
                                     .WithConsoleLogger(LogLevel.Trace)
                                     .Build();
+
                     
                     try
                     {
+
                         await conn.StartAsync();
 
                         return conn;
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
                         await Task.Delay(1000);
                     }
                 }
             }
 
-            string baseUrl = "http://localhost:1842/clientsub";
+            string baseUrl = $"{_config.ServerUrl}/{_config.ChannelName}";
             Console.WriteLine("Connecting to {0}", baseUrl);
             HubConnection connection = await ConnectAsync(baseUrl);
             try

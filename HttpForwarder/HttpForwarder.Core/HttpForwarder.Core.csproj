@@ -12,11 +12,5 @@
   <ItemGroup>
     <ProjectReference Include="..\HttpForwarder.Shared\HttpForwarder.Shared.csproj" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <None Update="ioc.jcfg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
 
 </Project>

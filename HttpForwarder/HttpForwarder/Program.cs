@@ -32,10 +32,23 @@ namespace HttpForwarder
             BuildWebHost(args).Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static IWebHost BuildWebHost(string[] args)
+        {
+            string basePath = AppContext.BaseDirectory;
+
+            var webconfig = new ConfigurationBuilder()
+                .SetBasePath(basePath)
+                .AddJsonFile("host.json", false)
+                .Build();
+            
+            var host = new WebHostBuilder()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseConfiguration(webconfig)
+                .UseKestrel()
                 .UseStartup<Startup>()
                 .UseSerilog()
                 .Build();
+            return host;
+        }
     }
 }

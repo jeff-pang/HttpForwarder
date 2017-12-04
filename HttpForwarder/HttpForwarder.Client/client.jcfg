@@ -1,5 +1,6 @@
 {
-  "ServerUrl": "http://localhost:1842",
+  "ServerUrl": "http://192.168.1.31:81",
   "EndpointUrl": "http://localhost/",
+  "ChannelName": "clientsub",
   "Uid": "1"
 }
