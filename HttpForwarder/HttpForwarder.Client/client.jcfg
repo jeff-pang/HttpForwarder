@@ -1,5 +1,5 @@
 {
-  "ServerUrl": "http://192.168.1.31:81",
+  "ServerUrl": "http://dev.turnkeyinc.com",
   "EndpointUrl": "http://localhost/",
   "ChannelName": "clientsub",
   "Uid": "1"
