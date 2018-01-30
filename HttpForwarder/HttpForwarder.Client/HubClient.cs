@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -48,7 +49,7 @@ namespace HttpForwarder.Client
             HubConnection connection = await ConnectAsync(baseUrl);
             try
             {
-                connection.On<HttpRequest>("Send", process);
+                connection.On<FwdRequest>("Send", process);
                 await connection.InvokeAsync("Join", _config.Uid);
 
                 Console.WriteLine("Press <enter> to exit");
@@ -62,7 +63,7 @@ namespace HttpForwarder.Client
             return 0;
         }
 
-        private void process(HttpRequest request)
+        private void process(FwdRequest request)
         {
             var endpointClient = new RestClient(_config.EndpointUrl);
             Method method = (Method)Enum.Parse(typeof(Method), request.Method);
@@ -85,15 +86,18 @@ namespace HttpForwarder.Client
             {
                 endptRequest.AddCookie(cookie.Key, cookie.Value);
             }
-            
+            MemoryStream ms = new MemoryStream();
+            endptRequest.ResponseWriter = (responseStream) => responseStream.CopyTo(ms);
             IRestResponse response = endpointClient.Execute(endptRequest);
 
             var serverclient = new RestClient(_config.ServerUrl);
             var serverRequest = new RestRequest("/client/{uid}/{requestId}", Method.POST);
             serverRequest.AddUrlSegment("uid", _config.Uid);
-            serverRequest.AddUrlSegment("requestId", request.RequestId);            
-            serverRequest.AddParameter(response.ContentType, response.Content, ParameterType.RequestBody);
+            serverRequest.AddUrlSegment("requestId", request.RequestId);
+            byte[] content = ms.ToArray();
+            serverRequest.AddParameter(response.ContentType,content, ParameterType.RequestBody);
             serverRequest.AddHeader("statusCode", response.StatusCode.ToString());
+            
             serverclient.Execute(serverRequest);
         }
     }

@@ -9,7 +9,7 @@ namespace HttpForwarder.Core.WebSocks
 {
     public class ClientSub : Hub
     {
-        public Task Send(string uid, HttpRequest message)
+        public Task Send(string uid, FwdRequest message)
         {
             return Clients.Group(uid).InvokeAsync("Send", message);
         }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HttpForwarder.Shared.Models
 {
-    public class HttpRequest
+    public class FwdRequest
     {
         public class HeaderValues : List<string> { }
 

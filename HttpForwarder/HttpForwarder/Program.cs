@@ -20,11 +20,11 @@ namespace HttpForwarder
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.Logger(lc =>
-                    lc.Filter.ByExcluding(evt => evt.Level == Serilog.Events.LogEventLevel.Debug)
+                    lc.Filter.ByExcluding(evt => evt.Level == LogEventLevel.Debug)
                     .Enrich.FromLogContext()
                    .WriteTo.LiterateConsole()
                    .WriteTo.RollingFile(Path.Combine(path, "logs", "{Date}.log")))
-                .WriteTo.Logger(lc => lc.Filter.ByIncludingOnly(evt => evt.Level == Serilog.Events.LogEventLevel.Debug)
+                .WriteTo.Logger(lc => lc.Filter.ByIncludingOnly(evt => evt.Level == LogEventLevel.Debug)
                     .Enrich.FromLogContext()
                    .WriteTo.RollingFile(Path.Combine(path, "logs", "{Date}-details.log")))
                 .CreateLogger();

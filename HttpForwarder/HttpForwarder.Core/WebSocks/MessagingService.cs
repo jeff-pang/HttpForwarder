@@ -12,7 +12,7 @@ namespace HttpForwarder.Core.WebSocks
             _hubContext = hubContext;
         }
 
-        public Task SendMessage(string groupId, HttpRequest message)
+        public Task SendMessage(string groupId, FwdRequest message)
         {
             return _hubContext.Clients.Group(groupId).InvokeAsync("Send", message);
         }

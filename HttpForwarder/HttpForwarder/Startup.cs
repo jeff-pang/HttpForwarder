@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using HttpForwarder.Core.WebSocks;
+using Serilog;
+using System.Threading.Tasks;
+using System.Text;
 
 namespace HttpForwarder
 {

@@ -8,6 +8,6 @@ namespace HttpForwarder.Shared.Models
     {
         public string RequestId { get; set; }
         public string Uid { get; set; }
-        public HttpRequest Request { get; set; }
+        public FwdRequest Request { get; set; }
     }
 }
